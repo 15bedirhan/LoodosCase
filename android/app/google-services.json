@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "286395298373",
+    "project_id": "loodoscase-99373",
+    "storage_bucket": "loodoscase-99373.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286395298373:android:337499d01d81dd4a35692c",
+        "android_client_info": {
+          "package_name": "com.loodoscase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286395298373-b5f458skcs4ied39l89qbu681eg47343.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0CuJ4kPpOFBFUsBW9nRHvSjxH8DRjxVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286395298373-b5f458skcs4ied39l89qbu681eg47343.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286395298373-8u45gf5b32bpg8t56j423g1s53n94i95.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Loodos.LoodosCase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
