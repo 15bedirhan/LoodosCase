@@ -13,9 +13,9 @@ import React, {Props, useContext} from 'react';
 
 //3rd party contents and others
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {AppContext} from '../context/AppContext';
 import analytics from '@react-native-firebase/analytics';
 
+import {AppContext} from '../context/AppContext';
 import {COLORS, FONTS, images, SIZES} from '../constants';
 
 const DetailPage = ({navigation}: Props) => {
