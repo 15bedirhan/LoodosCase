@@ -11,14 +11,24 @@ const SplashScreen = ({navigation}: Props) => {
   const [remoteConfigText, setRemoteConfigText] = React.useState<string>('');
 
   function getRemoteConfig() {
-    const LoodosText = remoteConfig().getValue('Loodos');
-    console.log('bb', remoteConfig().getValue('loodos_text').asString());
-    setRemoteConfigText(LoodosText.asString());
-    console.log('aa', LoodosText.asString());
-
-    setTimeout(() => {
-      navigation.replace('HomePage');
-    }, 3000);
+    remoteConfig()
+      .setDefaults({
+        awesome_new_feature: 'disabled',
+      })
+      .then(() => remoteConfig().fetchAndActivate())
+      .then(fetchedRemotely => {
+        if (fetchedRemotely) {
+          const LoodosText = remoteConfig().getValue('Loodos');
+          setRemoteConfigText(LoodosText.asString());
+          setTimeout(() => {
+            navigation.replace('HomePage');
+          }, 3000);
+        } else {
+          console.log(
+            'No configs were fetched from the backend, and the local configs were already activated',
+          );
+        }
+      });
   }
   function checkInternetConnection() {
     NetInfo.fetch().then(state => {

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {Props, useContext} from 'react';
 import {
@@ -10,7 +10,6 @@ import {
   Image,
   Animated,
   Easing,
-  Alert,
 } from 'react-native';
 
 //3rd party libraries && others
@@ -22,9 +21,9 @@ import {AppContext} from '../context/AppContext';
 
 const HomePage = ({navigation}: Props) => {
   const [searchString, setSearchString] = React.useState<string>(''); //user type for search a movie
-  const [delaySearch, setDelaySearch] = React.useState(null); //use for search timeout
+  const [delaySearch, setDelaySearch] = React.useState<any>(null); //use for search timeout
   const [imageError, setImageError] = React.useState<boolean>(false); //if there are no image show not found component
-  const [hasError, setHasError] = React.useState<boolean>(false);
+  const [hasError, setHasError] = React.useState<boolean | object>(false);
   const [loading, setLoading] = React.useState<boolean>(true); //for loading animation
 
   const {movieData, setMovieData}: any = useContext(AppContext);
@@ -49,8 +48,9 @@ const HomePage = ({navigation}: Props) => {
     );
   }
 
-  function getMovieDetail(text: object) {
+  function getMovieDetail(text: string) {
     setLoading(true);
+    setImageError(false); //set the image error value false right before request send
     fetch(
       `https://www.omdbapi.com/?i=tt3896198&apikey=78257c9&t=${text}&plot=full`,
     )
@@ -100,12 +100,14 @@ const HomePage = ({navigation}: Props) => {
           onPress={() => navigation.navigate('DetailPage')}
           style={styles.cardContainer}>
           <Text style={styles.title}>{movieData?.Title}</Text>
-          <Image
-            onError={e => setImageError(true)}
-            style={styles.bgImage}
-            resizeMode="cover"
-            source={{uri: movieData?.Poster}}
-          />
+          {!imageError && (
+            <Image
+              onError={() => setImageError(true)}
+              style={styles.bgImage}
+              resizeMode="cover"
+              source={{uri: movieData?.Poster}}
+            />
+          )}
         </TouchableOpacity>
       ),
       [movieData, imageError],
@@ -146,7 +148,7 @@ const HomePage = ({navigation}: Props) => {
       return <MovieCardComp />;
     } else if (hasError?.error) {
       return (
-        <Text style={styles.textInput}>
+        <Text style={[styles.textInput, {width: '100%', textAlign: 'center'}]}>
           Something went wrong. {hasError?.e}
         </Text>
       );

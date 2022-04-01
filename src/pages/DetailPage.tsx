@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import {
   Image,
@@ -13,6 +14,7 @@ import React, {Props, useContext} from 'react';
 //3rd party contents and others
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppContext} from '../context/AppContext';
+import analytics from '@react-native-firebase/analytics';
 
 import {COLORS, FONTS, images, SIZES} from '../constants';
 
@@ -30,9 +32,7 @@ const DetailPage = ({navigation}: Props) => {
         <SafeAreaView>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={{
-              marginLeft: '5%',
-            }}>
+            style={styles.backContainer}>
             <Text style={styles.b3Text}>Back</Text>
           </TouchableOpacity>
         </SafeAreaView>
@@ -101,6 +101,14 @@ const DetailPage = ({navigation}: Props) => {
       </View>
     );
   }
+
+  React.useEffect(() => {
+    //log event to firebase
+    async function logFirebase() {
+      await analytics().logEvent('movieData', movieData);
+    }
+    logFirebase();
+  }, []);
   return (
     <View style={styles.container}>
       {/* header with img component */}
@@ -136,6 +144,15 @@ const styles = StyleSheet.create({
     borderColor: COLORS.lightGray,
     paddingVertical: '5%',
     flexDirection: 'row',
+  },
+  backContainer: {
+    margin: '5%',
+    backgroundColor: COLORS.green,
+    alignSelf: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '2%',
+    borderRadius: SIZES.radius,
   },
   titleTextSty: {...FONTS.body1, color: COLORS.white},
   genreTextSty: {
