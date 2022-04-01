@@ -8,10 +8,10 @@ import {AppContextWrapper} from '../context/AppContext';
 //pages
 import HomePage from '../pages/HomePage';
 import DetailPage from '../pages/DetailPage';
+import SplashScreen from '../pages/SplashScreen';
 
 //types
 import {RootStackParamList} from '../types/RootStackState';
-import SplashScreen from '../pages/SplashScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
