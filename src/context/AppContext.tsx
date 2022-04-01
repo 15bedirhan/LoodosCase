@@ -1,13 +1,11 @@
 import React, {createContext, useContext, useState, FC} from 'react';
-import {ContextState} from '../types/ContextState';
+import {ContextState, IMovieDataState} from '../types/ContextState';
 
-const contextDefaultValues: ContextState = {
-  response: {},
-};
+const contextDefaultValues: ContextState = {};
 export const AppContext = createContext<ContextState>(contextDefaultValues);
 
 export const AppContextWrapper: FC = ({children}) => {
-  const [movieData, setMovieData] = useState(); //movie detail from request
+  const [movieData, setMovieData] = useState<IMovieDataState | null>(); //movie detail from request
   return (
     <AppContext.Provider
       value={{
