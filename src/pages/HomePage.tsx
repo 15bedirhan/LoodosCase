@@ -56,7 +56,7 @@ const HomePage = ({navigation}: Props) => {
     )
       .then(response => response.json())
       .then(data => {
-        //result save async storage and state
+        //result save state
         console.log(data);
         if (data.Response === 'True') {
           setMovieData(data);
